@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, Button, Container, FormControl, FormLabel, Heading, Input, Text, VStack } from '@chakra-ui/react';
 import { useSupabaseAuth, SupabaseAuthUI } from '../integrations/supabase/auth';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../integrations/supabase/index.js';
 
 const Login = () => {
   const [email, setEmail] = useState('');
