@@ -23,11 +23,11 @@ export const SupabaseAuthProviderInner = ({ children }) => {
   useEffect(() => {
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
+      setSession(session || null);
     };
 
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
+      setSession(session || null);
       queryClient.invalidateQueries('user');
     });
 
@@ -45,8 +45,8 @@ export const SupabaseAuthProviderInner = ({ children }) => {
   };
 
   return (
-    <SupabaseAuthContext.Provider value={{ session, logout }}>
-    {children}
+    <SupabaseAuthContext.Provider value={{ session: session || null, logout }}>
+      {children}
     </SupabaseAuthContext.Provider>
   );
 };
